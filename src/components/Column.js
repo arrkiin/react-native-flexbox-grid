@@ -6,22 +6,13 @@ import {
   getComponentWidth,
   getComponentOffset,
 } from '../lib/helpers';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 
 class Column extends Component {
-  state = {
-    width: 0,
+  onLayoutHandler = ({ nativeEvent: { layout: { x, y, width, height } } }) => {
+    this.forceUpdate();
   };
-  componentDidMount() {
-    this.updateSize();
-  }
-  updateSize = () => {
-    const { gridProps } = this.getGridProps(this.props);
-    this.setState({
-      width: getComponentWidth(getScreenSize(), gridProps),
-    });
-  };
-  getGridProps = props => {
+  render() {
     const {
       sm,
       smOffset,
@@ -34,7 +25,7 @@ class Column extends Component {
       lgHidden,
       rowSize,
       ...rest
-    } = props;
+    } = this.props;
 
     const gridProps = {
       sm,
@@ -49,18 +40,13 @@ class Column extends Component {
       rowSize,
     };
 
-    return { gridProps, rest };
-  };
-  render() {
-    const { gridProps, rest } = this.getGridProps(this.props);
-
     if (isHidden(getScreenSize(), gridProps)) {
       return null;
     } else {
       return (
         <View
-          onLayout={this.updateSize.bind(this)}
           {...rest}
+          onLayout={this.onLayoutHandler}
           style={[
             this.props.style,
             {
