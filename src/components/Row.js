@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getScreenSize } from '../lib/ScreenSize';
 import { isHidden } from '../lib/helpers';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 
 const cloneElements = props => {
   //if size doesn't exist or is 0 default to 12
@@ -14,9 +14,21 @@ const cloneElements = props => {
 };
 
 class Row extends Component {
+    onLayoutHandler = ({ nativeEvent: { layout: { x, y, width, height } } }) => {
+        this.forceUpdate();
+      };
+  onDimensionsChangeHandler = event => {
+    this.forceUpdate();
+  };
   state = {
     show: false,
   };
+  componentWillMount() {
+    Dimensions.addEventListener('change',this.onDimensionsChangeHandler); 
+  }
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change',this.onDimensionsChangeHandler); 
+  }
   componentDidMount() {
     this.setState({ show: true });
   }
