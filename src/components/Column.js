@@ -1,66 +1,105 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { getScreenSize } from '../lib/ScreenSize';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { getScreenSize } from '../lib/ScreenSize'
 import {
   isHidden,
   getComponentWidth,
   getComponentOffset,
-} from '../lib/helpers';
-import { View, Dimensions } from 'react-native';
+  getPadding,
+} from '../lib/helpers'
+import { View, Dimensions } from 'react-native'
 
 class Column extends Component {
-  onLayoutHandler = ({ nativeEvent: { layout: { x, y, width, height } } }) => {
-    this.forceUpdate();
-  };
+  onLayoutHandler = ({
+    nativeEvent: {
+      layout: { x, y, width, height },
+    },
+  }) => {
+    this.forceUpdate()
+  }
   render() {
     const {
       xs,
       xsOffset,
       xsHidden,
+      xsPadding,
       sm,
       smOffset,
       smHidden,
+      smPadding,
       md,
       mdOffset,
       mdHidden,
+      mdPadding,
       lg,
       lgOffset,
       lgHidden,
+      lgPadding,
       xl,
       xlOffset,
       xlHidden,
+      xlPadding,
       xxl,
       xxlOffset,
       xxlHidden,
+      xxlPadding,
+      first,
+      mid,
+      last,
       rowSize,
       ...rest
-    } = this.props;
+    } = this.props
 
     const gridProps = {
       xs,
       xsOffset,
       xsHidden,
+      xsPadding,
       sm,
       smOffset,
       smHidden,
+      smPadding,
       md,
       mdOffset,
       mdHidden,
+      mdPadding,
       lg,
       lgOffset,
       lgHidden,
+      lgPadding,
       xl,
       xlOffset,
       xlHidden,
+      xlPadding,
       xxl,
       xxlOffset,
       xxlHidden,
+      xxlPadding,
+      first,
+      mid,
+      last,
       rowSize,
-    };
+    }
 
     if (isHidden(getScreenSize(), gridProps)) {
-      return null;
+      return null
     } else {
+      const width = getComponentWidth(getScreenSize(), gridProps)
+      const padding = getPadding(getScreenSize(), gridProps)
+      var paddingStyle = {}
+      if (width === '100%') {
+        paddingStyle = {
+          paddingBottom: gridProps.first ? padding : 0,
+          paddingTop: gridProps.last ? padding : 0,
+          paddingVertical: gridProps.mid ? padding : 0,
+        }
+      } else {
+        paddingStyle = {
+          paddingRight: gridProps.first ? padding : 0,
+          paddingLeft: gridProps.last ? padding : 0,
+          paddingHorizontal: gridProps.mid ? padding : 0,
+        }
+      }
       return (
         <View
           {...rest}
@@ -68,15 +107,16 @@ class Column extends Component {
           style={[
             this.props.style,
             {
-              width: getComponentWidth(getScreenSize(), gridProps),
+              width: width,
               flexDirection: 'column',
               marginLeft: getComponentOffset(getScreenSize(), gridProps),
             },
+            paddingStyle,
           ]}
         >
           {rest.children}
         </View>
-      );
+      )
     }
   }
 }
@@ -100,6 +140,6 @@ Column.propTypes = {
   xxl: PropTypes.number,
   xxlOffset: PropTypes.number,
   xxlHidden: PropTypes.bool,
-};
+}
 
-export default Column;
+export default Column

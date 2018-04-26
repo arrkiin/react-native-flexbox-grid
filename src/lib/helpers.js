@@ -177,4 +177,83 @@ const getComponentOffset = (screenSize, props) => {
   }
 };
 
-module.exports = {isHidden, getComponentWidth, getComponentOffset}
+const getPadding = (screenSize, props) => {
+  switch(screenSize) {
+    case 'xs':
+      if(props.xsPadding){
+        return props.xsPadding;
+      } else {
+        return 0;
+      }
+      break;
+    case 'sm':
+      if(props.smPadding){
+        return props.smPadding;
+      } else if(props.xsPadding){
+        return props.xsPadding;
+      } else {
+        return 0;
+      }
+      break;
+    case 'md':
+      if(props.mdPadding){
+        return props.mdPadding;
+      } else if(props.smPadding){
+        return props.smPadding;
+      } else if(props.xsPadding){
+        return props.xsPadding;
+      } else {
+        return 0;
+      }
+      break;
+    case 'lg':
+      if(props.lgPadding){
+        return props.lgPadding;
+      } else if(props.mdPadding){
+        return props.mdPadding;
+      } else if(props.smPadding){
+        return props.smPadding;
+      } else if(props.xsPadding){
+        return props.xsPadding;
+      } else {
+        return 0;
+      }
+      break;
+    case 'xl':
+      if(props.xlPadding){
+        return props.xlPadding;
+      } else if(props.lgPadding){
+        return props.lgPadding;
+      } else if(props.mdPadding){
+        return props.mdPadding;
+      } else if(props.smPadding){
+        return props.smPadding;
+      } else if(props.xsPadding){
+        return props.xsPadding;
+      } else {
+        return 0;
+      }
+      break;
+    case 'xxl':
+      if(props.xxlPadding){
+        return props.xxlPadding;
+      } else if(props.xlPadding){
+        return props.xlPadding;
+      } else if(props.lgPadding){
+        return props.lgPadding;
+      } else if(props.mdPadding){
+        return props.mdPadding;
+      } else if(props.smPadding){
+        return props.smPadding;
+      } else if(props.xsPadding){
+        return props.xsPadding;
+      } else {
+        return 0;
+      }
+      break;
+    default:
+      return 0;
+  }
+};
+
+module.exports = {isHidden, getComponentWidth, getComponentOffset, getPadding}
