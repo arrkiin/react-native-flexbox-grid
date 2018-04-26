@@ -61,9 +61,12 @@ class Row extends Component {
 Row.propTypes = {
   size: PropTypes.number,
   nowrap: PropTypes.bool,
+  xsHidden: PropTypes.bool,
   smHidden: PropTypes.bool,
   mdHidden: PropTypes.bool,
   lgHidden: PropTypes.bool,
+  xlHidden: PropTypes.bool,
+  xxlHidden: PropTypes.bool,
 };
 
 export default Row;

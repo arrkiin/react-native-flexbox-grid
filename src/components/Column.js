@@ -14,6 +14,9 @@ class Column extends Component {
   };
   render() {
     const {
+      xs,
+      xsOffset,
+      xsHidden,
       sm,
       smOffset,
       smHidden,
@@ -23,11 +26,20 @@ class Column extends Component {
       lg,
       lgOffset,
       lgHidden,
+      xl,
+      xlOffset,
+      xlHidden,
+      xxl,
+      xxlOffset,
+      xxlHidden,
       rowSize,
       ...rest
     } = this.props;
 
     const gridProps = {
+      xs,
+      xsOffset,
+      xsHidden,
       sm,
       smOffset,
       smHidden,
@@ -37,6 +49,12 @@ class Column extends Component {
       lg,
       lgOffset,
       lgHidden,
+      xl,
+      xlOffset,
+      xlHidden,
+      xxl,
+      xxlOffset,
+      xxlHidden,
       rowSize,
     };
 
@@ -64,6 +82,9 @@ class Column extends Component {
 }
 
 Column.propTypes = {
+  xs: PropTypes.number,
+  xsOffset: PropTypes.number,
+  xsHidden: PropTypes.bool,
   sm: PropTypes.number,
   smOffset: PropTypes.number,
   smHidden: PropTypes.bool,
@@ -73,6 +94,12 @@ Column.propTypes = {
   lg: PropTypes.number,
   lgOffset: PropTypes.number,
   lgHidden: PropTypes.bool,
+  xl: PropTypes.number,
+  xlOffset: PropTypes.number,
+  xlHidden: PropTypes.bool,
+  xxl: PropTypes.number,
+  xxlOffset: PropTypes.number,
+  xxlHidden: PropTypes.bool,
 };
 
 export default Column;
